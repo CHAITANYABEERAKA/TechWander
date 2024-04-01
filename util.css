@@ -1,0 +1,43 @@
+.navigation {
+  display: flex;
+}
+.item-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.space-between {
+  justify-content: space-between;
+}
+@media screen and (max-width: 768px) {
+  .container nav {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .left ul {
+    margin-top: 20px;
+  }
+
+  .right input,
+  .right button {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  .profile-container {
+    text-align: center;
+  }
+
+  .profile-details {
+    max-width: 100%;
+  }
+
+  .profile-picture img {
+    max-width: 150px;
+  }
+}

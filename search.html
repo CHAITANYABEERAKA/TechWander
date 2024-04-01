@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results - TechWander</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="util.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@200;400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="container">
+      <nav class="navigation space-between">
+        <div class="left navigation item-center">
+          <img src="photos/techwander-logo.png" alt="logo" />
+          <ul class="navigation item-center justify-center uppercase">
+            <li><a href="index.html"> Home</li>
+            <li><a href="index.html">Content</li>
+          </ul>
+        </div>
+        <div class="right navigation item-center">
+          <input
+            class="search"
+            type="text"
+            placeholder="Search"
+            id="searchInput"
+          />
+          <button onclick="searchVideos()">Search</button>
+        </div>
+      </nav>
+    </header>
+
+    <section class="section2">
+      <div class="content-section">
+        <h2>Search Results</h2>
+        <div class="grid-container" id="searchResults">
+          <!-- Search results will be dynamically populated here -->
+        </div>
+      </div>
+    </section>
+    <script>
+      // Extract the search query from the URL
+      var searchQuery = decodeURIComponent(
+        new URLSearchParams(window.location.search).get("q")
+      );
+
+      // Display the search query in the search input field
+      document.getElementById("searchInput").value = searchQuery;
+
+      // Simulate fetching search results based on the search query
+      var videoData = [
+        {
+          title: "vivo x100 pro | vivo x100 pro review | vivo x100 series",
+          thumbnail: "photos/vivox100series.png",
+          url: "https://youtu.be/XsOBXHpcKAM",
+        },
+        {
+          title: "Discover the Secrets of Android 14: Must-Have Features",
+          thumbnail: "photos/secretsof android 14.png",
+          url: "https://youtu.be/rLpk23fCEng",
+        },
+        {
+          title: "iqoo 12 | iqoo 12 review | initial impressions",
+          thumbnail: "photos/iqoo12.png",
+          url: "https://youtu.be/Y1l09h7SstY",
+        },
+        // Add more video data as needed
+      ];
+
+      // Filter videos based on the search query
+      var filteredVideos = videoData.filter(function (video) {
+        return video.title.toLowerCase().includes(searchQuery.toLowerCase());
+      });
+
+      // Display search results
+      displaySearchResults(filteredVideos);
+
+      function displaySearchResults(results) {
+        var searchResultsContainer = document.getElementById("searchResults");
+        results.forEach(function (video) {
+          var resultItem = document.createElement("div");
+          resultItem.className = "grid-item";
+
+          var thumbnail = document.createElement("img");
+          thumbnail.src = video.thumbnail;
+          thumbnail.alt = video.title;
+
+          var titleLink = document.createElement("div");
+          titleLink.className = "video-title";
+          titleLink.innerHTML =
+            '<a href="' + video.url + '">' + video.title + "</a>";
+
+          resultItem.appendChild(thumbnail);
+          resultItem.appendChild(titleLink);
+
+          searchResultsContainer.appendChild(resultItem);
+        });
+      }
+
+      function searchVideos() {
+        // Get the new search input value
+        var newKeyword = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+
+        // Redirect to the search results page with the updated search query
+        window.location.href =
+          "search-results.html?q=" + encodeURIComponent(newKeyword);
+      }
+    </script>
+  </body>
+</html>
